@@ -79,9 +79,9 @@ namespace WpfComplexiteit
         {
             string woord = txtWoord.Text.ToLower();
 
-            lblKarakters.Content = "aantal karaketers: " + woord.Length;
-            lblLettergrepen.Content = "aantal lettergrepen: " + AantalLettergrepen(woord).ToString();
-            lblComplexiteit.Content = "complexiteit: " + Math.Round(Complexiteit(woord), 1).ToString();
+            lblAnalyse.Content = @$"aantal karakters: {woord.Length}
+aantal lettergrepen: {AantalLettergrepen(woord)}
+complexiteit: {Math.Round(Complexiteit(woord), 1)}";
         }
     }
 }

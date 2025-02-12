@@ -7,10 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="txtWoord" TextWrapping="Wrap" Text="" Margin="52,40,557,350" />
-        <Label x:Name="lblKarakters" Content="aantal karakters: " HorizontalAlignment="Left" Margin="52,89,0,0" VerticalAlignment="Top" Width="146"/>
-        <Label x:Name="lblLettergrepen" Content="aantal lettergrepen:" HorizontalAlignment="Left" Margin="52,120,0,0" VerticalAlignment="Top" Width="146"/>
-        <Label x:Name="lblComplexiteit" Content="complexiteit: " HorizontalAlignment="Left" Margin="52,151,0,0" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="txtWoord" TextWrapping="Wrap" Text="" Margin="52,40,557,350" Foreground="#FF111010" />
+        <Label x:Name="lblAnalyse" Content="aantal karakters: &#xD;&#xA;aantal lettergrepen:&#xD;&#xA;complexiteit: &#xD;&#xA;" HorizontalAlignment="Left" Margin="52,89,0,0" VerticalAlignment="Top" Width="191"/>
         <Button x:Name="btnAnalyseer" Content="ANALYSEER" HorizontalAlignment="Left" Margin="280,40,0,0" VerticalAlignment="Top" Height="26" Width="84" Click="btnAnalyseer_Click"/>
 
     </Grid>
