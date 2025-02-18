@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfTaken.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTaken"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="Taak:" HorizontalAlignment="Left" Margin="71,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prioriteit:" HorizontalAlignment="Left" Margin="71,111,0,0" VerticalAlignment="Top"/>
+        <Label Content="Deadline:" HorizontalAlignment="Left" Margin="71,148,0,0" VerticalAlignment="Top"/>
+        <Label Content="Door:" HorizontalAlignment="Left" Margin="71,191,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTaak" HorizontalAlignment="Left" Margin="149,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TextChanged="TxtTaak_TextChanged"/>
+        <ComboBox x:Name="cbxPrioriteit" HorizontalAlignment="Left" Margin="149,115,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="CbxPrioriteit_SelectionChanged">
+            <ComboBoxItem Content="laag" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="gemiddeld" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="hoog" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <DatePicker x:Name="txtDeadline" HorizontalAlignment="Left" Margin="149,150,0,0" VerticalAlignment="Top" Width="177" SelectedDateChanged="TxtDeadline_SelectedDateChanged"/>
+        <RadioButton x:Name="rdnAdam" Content="Adam" GroupName="group1" HorizontalAlignment="Left" Margin="149,197,0,0" VerticalAlignment="Top" Checked="RdnAdam_Checked"/>
+        <RadioButton x:Name="rdnBilal" Content="Bilal" GroupName="group1" HorizontalAlignment="Left" Margin="209,197,0,0" VerticalAlignment="Top" Checked="RdnBilal_Checked"/>
+        <RadioButton x:Name="rdnChelsey" Content="Chelsey" GroupName="group1" HorizontalAlignment="Left" Margin="266,197,0,0" VerticalAlignment="Top" Checked="RdnChelsey_Checked"/>
+        <Button x:Name="btnToevoegen" Content="TOEVOEGEN&gt;&gt;" HorizontalAlignment="Left" Margin="238,254,0,0" VerticalAlignment="Top" Width="88" Height="40" Click="BtnToevoegen_Click" IsEnabled="False"/>
+        <ListBox x:Name="lbxTaken" Margin="400,76,76,140">
+        </ListBox>
+        <Button x:Name="btnVerwijderen" Content="VERWIJDEREN" HorizontalAlignment="Left" Margin="569,325,0,0" VerticalAlignment="Top" Width="88" Height="40" Click="BtnVerwijderen_Click" IsEnabled="False" />
+        <Button x:Name="btnTerugzetten" Content="TERUGZETTEN" HorizontalAlignment="Left" Margin="458,325,0,0" VerticalAlignment="Top" Width="88" Height="40" IsEnabled="False"/>
+        <TextBlock x:Name="txtMelding" HorizontalAlignment="Left" Margin="71,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="150" Foreground="#FFEA0A0A" Text="" Width="158"/>
+
+    </Grid>
+</Window>

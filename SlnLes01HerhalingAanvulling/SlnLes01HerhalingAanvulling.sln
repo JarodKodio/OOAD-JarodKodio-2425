@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleComplexiteit", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfComplexiteit", "WpfComplexiteit\WpfComplexiteit.csproj", "{C87CE9FD-22BF-4CAF-810B-422177EBD84E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTaken", "WpfTaken\WpfTaken.csproj", "{14B5C5AF-5C55-4788-9F0B-81F7DD9688ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{C87CE9FD-22BF-4CAF-810B-422177EBD84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C87CE9FD-22BF-4CAF-810B-422177EBD84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C87CE9FD-22BF-4CAF-810B-422177EBD84E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B5C5AF-5C55-4788-9F0B-81F7DD9688ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B5C5AF-5C55-4788-9F0B-81F7DD9688ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B5C5AF-5C55-4788-9F0B-81F7DD9688ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B5C5AF-5C55-4788-9F0B-81F7DD9688ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -33,6 +39,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{872DE225-75E3-45C2-9D5E-D690A475EBB0} = {7E572ACA-748F-4422-B59B-53A965F601F5}
 		{C87CE9FD-22BF-4CAF-810B-422177EBD84E} = {7E572ACA-748F-4422-B59B-53A965F601F5}
+		{14B5C5AF-5C55-4788-9F0B-81F7DD9688ED} = {7E572ACA-748F-4422-B59B-53A965F601F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2057836-93D3-42B2-B417-C462FBD4B347}
