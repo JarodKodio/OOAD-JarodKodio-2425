@@ -38,7 +38,6 @@ namespace WpfRaadLand
                 stopwatch.Stop();
                 btnStart.IsEnabled = true;
                 txtCommentaar.Text = "Helaas je tijd is op";
-
             }
         }
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
@@ -46,7 +45,7 @@ namespace WpfRaadLand
             if (sender is Image img)
             {
                 string gekozenLand = img.Tag.ToString();
-                if (gekozenLand == rndland )
+                if (gekozenLand == rndland)
                 {
                     txtCommentaar.Text = "Juist!";
                 }
@@ -54,8 +53,8 @@ namespace WpfRaadLand
                 {
                     txtCommentaar.Text = $"Fout het juiste anrwoord is {rndland}";
                 }
-                timer.Stop ();
-                stopwatch.Stop ();
+                timer.Stop();
+                stopwatch.Stop();
                 btnStart.IsEnabled = true;
             }
         }
@@ -65,11 +64,8 @@ namespace WpfRaadLand
             stopwatch.Restart();
             timer.Start();
             rndland = RandomLand();
-
-
             btnStart.IsEnabled = false;
             txtCommentaar.Text = "Raad het land";
-
         }
 
         private string RandomLand()
