@@ -46,7 +46,6 @@ namespace WpfEllipsen
 
         private void TekenEllipsen()
         {
-            // Genereer willekeurige waarden
             double width = rnd.Next(20, 101);
             double height = rnd.Next(20, 101);
             double xPos = rnd.NextDouble() * (canvas1.Width - width);

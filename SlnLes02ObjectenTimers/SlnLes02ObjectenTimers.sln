@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfEllipsen", "WpfEllipsen\WpfEllipsen.csproj", "{85B86F34-00B7-409A-BFF5-6E3A1236FFC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfRaadLand", "WpfRaadLand\WpfRaadLand.csproj", "{7348B99F-F4CC-485D-BECC-2852A5E85D32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,12 +22,17 @@ Global
 		{85B86F34-00B7-409A-BFF5-6E3A1236FFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85B86F34-00B7-409A-BFF5-6E3A1236FFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85B86F34-00B7-409A-BFF5-6E3A1236FFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7348B99F-F4CC-485D-BECC-2852A5E85D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7348B99F-F4CC-485D-BECC-2852A5E85D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7348B99F-F4CC-485D-BECC-2852A5E85D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7348B99F-F4CC-485D-BECC-2852A5E85D32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{85B86F34-00B7-409A-BFF5-6E3A1236FFC4} = {D7D00716-DB6A-4D07-A942-0127DFF30F37}
+		{7348B99F-F4CC-485D-BECC-2852A5E85D32} = {D7D00716-DB6A-4D07-A942-0127DFF30F37}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAE3C2A3-351B-4838-9273-EF162D859226}

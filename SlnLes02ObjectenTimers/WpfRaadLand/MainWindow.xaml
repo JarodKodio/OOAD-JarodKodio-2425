@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfRaadLand.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRaadLand"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Margin="95,30,189,187">
+            <Image x:Name="imageNieuwzeeland" Source="media/nieuwzeeland.png" Width="100" MouseUp="Image_MouseUp" Height="100" Tag="Nieuwzeeland"/>
+            <Image x:Name="imgFinland" Source="media/finland.png" Width="100" Height="100" MouseUp="Image_MouseUp" Tag="Finland"/>
+            <Image x:Name="imgArgentina" Source="media/argentina.png" Width="100" Height="100" MouseUp="Image_MouseUp" Tag="Argentina"/>
+            <Image x:Name="imgMarokko" Source="media/marokko.png" Width="100" Height="100" MouseUp="Image_MouseUp" Tag="Marokko"/>
+            <Image x:Name="imgJapan" Source="media/japan.png" Width="100" Height="100" MouseUp="Image_MouseUp" Tag="Japan"/>
+        </StackPanel>
+
+        <TextBlock x:Name="txtCommentaar" HorizontalAlignment="Left" Margin="95,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210"><Run Text="Kllik het juiste land aan! Ben je klaar"/><Run Language="nl-be" Text="?"/></TextBlock>
+        <Button x:Name="btnStart" Content="START" HorizontalAlignment="Left" Margin="95,323,0,0" VerticalAlignment="Top" Click="BtnStart_Click"/>
+        <Rectangle x:Name="rctTime" HorizontalAlignment="Left" Height="27" Margin="95,362,0,0" Stroke="Black" VerticalAlignment="Top" Width="516" Fill="#FFB9C1F3"/>
+    </Grid>
+</Window>
