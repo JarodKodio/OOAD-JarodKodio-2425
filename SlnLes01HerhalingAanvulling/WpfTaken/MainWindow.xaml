@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            
+        </Grid.ColumnDefinitions>
         <Label Content="Taak:" HorizontalAlignment="Left" Margin="71,72,0,0" VerticalAlignment="Top"/>
         <Label Content="Prioriteit:" HorizontalAlignment="Left" Margin="71,111,0,0" VerticalAlignment="Top"/>
         <Label Content="Deadline:" HorizontalAlignment="Left" Margin="71,148,0,0" VerticalAlignment="Top"/>
