@@ -39,22 +39,27 @@ namespace ConsoleAnagram
                 return;
             }
 
+            // Lees de woorden in en filter op het aantal letters
             string[] woorden = System.IO.File.ReadAllLines(filePath);
             string[] gefilterdeWoorden = woorden.Where(w => w.Length == aantalLetters).ToArray();
 
             Random rnd = new Random();
 
+            // Kies een willekeurig woord en maak er een anagram van
             int randomIndex = rnd.Next(0, gefilterdeWoorden.Length);
             string woord = gefilterdeWoorden[randomIndex];
             string anagram = new string(woord.ToCharArray().OrderBy(c => rnd.Next()).ToArray());
 
+            // Start de stopwatch
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             bool geraden = false;
+
+            // Blijf anagrammen tonen tot het woord geraden is
             while (!geraden)
             {
                 Console.WriteLine($"Anagram: {anagram}");
-                Console.WriteLine("Raad het woord (druk op enter voor een nieuw anagram): ");
+                Console.Write("Raad het woord (druk op enter voor een nieuw anagram): ");
                 string geradenWoord = Console.ReadLine();
 
                 if (geradenWoord == woord)
@@ -66,7 +71,6 @@ namespace ConsoleAnagram
                 }
                 else
                 {
-                    Console.WriteLine("Raad het woord (druk op enter voor een nieuw anagram): ");
                     if (Console.ReadKey().Key == ConsoleKey.Enter)
                     {
                         // Schud opnieuw en toon het nieuwe anagram
