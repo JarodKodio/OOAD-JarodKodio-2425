@@ -13,5 +13,6 @@
         <TextBox x:Name="txtEersteBestand" HorizontalAlignment="Left" Margin="241,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtTweedeBestand" HorizontalAlignment="Left" Margin="241,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnVergelijk" Content="vergelijk" HorizontalAlignment="Left" Margin="310,170,0,0" VerticalAlignment="Top" Width="51" Click="BtnVergelijk_Click"/>
+        <Label x:Name="lblMessage" Content="" HorizontalAlignment="Left" Margin="323,247,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

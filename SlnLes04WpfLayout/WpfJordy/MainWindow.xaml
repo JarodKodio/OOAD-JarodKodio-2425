@@ -1,0 +1,103 @@
+﻿<Window x:Class="WpfJordy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfJordy"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="760" MinWidth="400">
+    <Grid Margin="0,6,10,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Header-->
+        <Grid Grid.Row="0" Height="140" Background="Beige" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" VerticalAlignment="Center" Source="media/logo.png" Height="100" Width="100" Margin="20"/>
+            <TextBlock Text="Red Jordy" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Content="LOGIN" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" BorderBrush="Transparent"/>
+        </Grid>
+        <!--Fotos Jordy-->
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image HorizontalAlignment="Left" VerticalAlignment="Center" Source="media/jordy1.jpg" Height="120" Width="160" Margin="10" Stretch="UniformToFill"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Center" Source="media/jordy2.jpg" Height="120" Width="160" Margin="10" Stretch="UniformToFill"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Center" Source="media/jordy3.jpg" Height="120" Width="160" Margin="10" Stretch="UniformToFill"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Center" Source="media/jordy4.jpg" Height="120" Width="160" Margin="10" Stretch="UniformToFill"/>
+        </WrapPanel>
+        <!--Beschrijving Jordy-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock FontSize="16" Grid.Column="0" HorizontalAlignment="Left" Margin="20">
+        <Run FontWeight="Bold">Naam:</Run> Jordy<LineBreak/>
+        <Run FontWeight="Bold">Leeftijd:</Run> 6 maanden<LineBreak/>
+        <Run FontWeight="Bold">Geslacht:</Run> mannetje<LineBreak/>
+        <Run FontWeight="Bold">Gewicht:</Run> 12kg
+            </TextBlock>
+    
+            <TextBlock HorizontalAlignment="Center" Grid.Column="1" Text="Hallo, ik ben Jordy! Ik hou van wandelen, kinderen en andere huisdieren. Ad veertien er al slaagden resident. Waaronder eindelijk schatkist mee men wat brischen visschers. Is om te markten streken en vrouwen" 
+               TextWrapping="Wrap" Margin="20"/>
+        </Grid>
+        <!--Formulier-->
+        <Grid HorizontalAlignment="Center" Grid.Row="3" Margin="0,0,0,10" MaxWidth="500">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="Wordt Jordy jouw nieuw maatje? Stuur hem een bericht!"></TextBlock>
+            <TextBlock Grid.Row="1" FontSize="16">
+        <Run FontWeight="Bold">Naam:</Run>
+            </TextBlock>
+
+            <TextBox Grid.Row="2" Name="NaamTextBox" Width="200"  HorizontalAlignment="Left" BorderBrush="LightBlue"/>
+
+            <TextBlock Grid.Row="3" FontSize="16">
+        <Run FontWeight="Bold">Straat:</Run>
+            </TextBlock>
+
+            <TextBox Grid.Row="4" Name="StraatTextBox" Width="200"  HorizontalAlignment="Left" BorderBrush="LightBlue"/>
+            
+            <TextBlock Grid.Row="5" FontSize="16">
+        <Run FontWeight="Bold">Postcode:</Run>
+            </TextBlock>
+
+            <TextBox Grid.Row="6" Name="PostcodeTextBox" Width="200" HorizontalAlignment="Left" BorderBrush="LightBlue"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="1" FontSize="16">
+                <Run FontWeight="Bold">Gemeente:</Run>
+            </TextBlock>
+
+            <TextBox Grid.Row="6" Grid.Column="1" Name="GemeenteTextBox" Width="200" BorderBrush="LightBlue"/>
+            
+            <TextBlock Grid.Row="7" Grid.Column="0" FontSize="16">
+                <Run FontWeight="Bold">Bericht:</Run>
+            </TextBlock>
+
+            <TextBox Grid.Row="8" Grid.Column="0" Name="BerichtTextBox" Width="200" HorizontalAlignment="Left" Height="100" BorderBrush="LightBlue"/>
+            <Button Grid.Row="9" Grid.Column="1" Width="80" HorizontalAlignment="Right" BorderBrush="Transparent">VERZENDEN</Button>
+        </Grid>
+        <!--Footer-->
+        <Grid Grid.Row="4" Background="Beige" Height="25">
+            <TextBlock Text="copyright 2024, verbond van dakloze dieren" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

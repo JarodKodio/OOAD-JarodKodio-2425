@@ -100,7 +100,6 @@ namespace WpfMatchFiles
             {
                 // user cancelled or escaped dialog window
             }
-            chosenFileName = txtTweedeBestand.Text;
         }
 
         private void BtnVergelijk_Click(object sender, RoutedEventArgs e)
