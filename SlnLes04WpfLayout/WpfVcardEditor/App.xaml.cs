@@ -10,5 +10,4 @@ namespace WpfVcardEditor
     public partial class App : Application
     {
     }
-
 }

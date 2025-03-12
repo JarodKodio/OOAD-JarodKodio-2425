@@ -45,7 +45,7 @@
                TextWrapping="Wrap" Margin="20"/>
         </Grid>
         <!--Formulier-->
-        <Grid HorizontalAlignment="Center" Grid.Row="3" Margin="0,0,0,10" MaxWidth="500">
+        <Grid HorizontalAlignment="Center" Grid.Row="3" Margin="0,0,0,10" MaxWidth="500" MinWidth="200">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -61,39 +61,39 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Text="Wordt Jordy jouw nieuw maatje? Stuur hem een bericht!"></TextBlock>
             <TextBlock Grid.Row="1" FontSize="16">
         <Run FontWeight="Bold">Naam:</Run>
             </TextBlock>
 
-            <TextBox Grid.Row="2" Name="NaamTextBox" Width="200"  HorizontalAlignment="Left" BorderBrush="LightBlue"/>
+            <TextBox Grid.Row="2" Name="NaamTextBox" MinWidth="200" MaxWidth="400" HorizontalAlignment="Left" BorderBrush="LightBlue"/>
 
             <TextBlock Grid.Row="3" FontSize="16">
         <Run FontWeight="Bold">Straat:</Run>
             </TextBlock>
 
-            <TextBox Grid.Row="4" Name="StraatTextBox" Width="200"  HorizontalAlignment="Left" BorderBrush="LightBlue"/>
+            <TextBox Grid.Row="4" Name="StraatTextBox" MinWidth="150" MaxWidth="400"  HorizontalAlignment="Left" BorderBrush="LightBlue"/>
             
             <TextBlock Grid.Row="5" FontSize="16">
         <Run FontWeight="Bold">Postcode:</Run>
             </TextBlock>
 
-            <TextBox Grid.Row="6" Name="PostcodeTextBox" Width="200" HorizontalAlignment="Left" BorderBrush="LightBlue"/>
+            <TextBox Grid.Row="6" Name="PostcodeTextBox" MinWidth="150" MaxWidth="400" HorizontalAlignment="Left" BorderBrush="LightBlue"/>
 
             <TextBlock Grid.Row="5" Grid.Column="1" FontSize="16">
                 <Run FontWeight="Bold">Gemeente:</Run>
             </TextBlock>
 
-            <TextBox Grid.Row="6" Grid.Column="1" Name="GemeenteTextBox" Width="200" BorderBrush="LightBlue"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Name="GemeenteTextBox" MinWidth="150" MaxWidth="400" BorderBrush="LightBlue"/>
             
             <TextBlock Grid.Row="7" Grid.Column="0" FontSize="16">
                 <Run FontWeight="Bold">Bericht:</Run>
             </TextBlock>
 
-            <TextBox Grid.Row="8" Grid.Column="0" Name="BerichtTextBox" Width="200" HorizontalAlignment="Left" Height="100" BorderBrush="LightBlue"/>
-            <Button Grid.Row="9" Grid.Column="1" Width="80" HorizontalAlignment="Right" BorderBrush="Transparent">VERZENDEN</Button>
+            <TextBox Grid.Row="8" Grid.Column="0" Name="BerichtTextBox" MinWidth="150" MaxWidth="400" HorizontalAlignment="Left" Height="100" BorderBrush="LightBlue"/>
+            <Button Grid.Row="9" Grid.Column="1" MinWidth="150" MaxWidth="400" HorizontalAlignment="Right" BorderBrush="Transparent">VERZENDEN</Button>
         </Grid>
         <!--Footer-->
         <Grid Grid.Row="4" Background="Beige" Height="25">

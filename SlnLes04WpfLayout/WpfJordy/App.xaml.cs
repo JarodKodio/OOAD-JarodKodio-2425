@@ -10,5 +10,4 @@ namespace WpfJordy
     public partial class App : Application
     {
     }
-
 }
