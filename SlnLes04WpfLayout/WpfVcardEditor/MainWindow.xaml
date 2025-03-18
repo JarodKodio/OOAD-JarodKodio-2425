@@ -11,9 +11,9 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_vCard">
                     <MenuItem Header="_New" />
-                    <MenuItem Header="_Open..." />
-                    <MenuItem Header="_Save" />
-                    <MenuItem Header="Save _As..." />
+                    <MenuItem Header="_Open..." Click="OpenFile_Click" />
+                    <MenuItem x:Name="btnSave" Header="_Save" Click="SaveFile_Click" IsEnabled="False"/>
+                    <MenuItem Header="Save _As..." Click="SaveAsFile_Click" />
                     <Separator />
                     <MenuItem Header="E_xit" Click="ExitItem_Click" />
                 </MenuItem>
@@ -52,21 +52,21 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Content="Voornaam" Margin="10"/>
-                            <TextBox Grid.Row="0" Grid.Column="1" Margin="10"/>
+                            <TextBox x:Name="txtVoornaam" Grid.Row="0" Grid.Column="1" Margin="10"/>
                             <Label Grid.Row="1" Grid.Column="0" Content="Achternaam" Margin="10" />
-                            <TextBox Grid.Row="1" Grid.Column="1" Margin="10"/>
+                            <TextBox x:Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="10"/>
                             <Label Grid.Row="2" Grid.Column="0" Content="Geboortedatum" Margin="10"/>
-                            <DatePicker Grid.Row="2" Grid.Column="1" Margin="10"/>
+                            <DatePicker x:Name="dtpGeboortedatum" Grid.Row="2" Grid.Column="1" Margin="10"/>
                             <Label Grid.Row="3" Grid.Column="0" Content="Geslacht" Margin="10"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1" Margin="10">
+                            <ComboBox x:Name="cbxGeslacht" Grid.Row="3" Grid.Column="1" Margin="10">
                                 <ComboBoxItem Content="Man" />
                                 <ComboBoxItem Content="Vrouw" />
                                 <ComboBoxItem Content="onbekend" />
                             </ComboBox>
                             <Label Grid.Row="4" Grid.Column="0" Content="Privé email" Margin="10"/>
-                            <TextBox Grid.Row="4" Grid.Column="1" Margin="10"/>
+                            <TextBox x:Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="10"/>
                             <Label Grid.Row="5" Grid.Column="0" Content="Privé telefoon" Margin="10"/>
-                            <TextBox Grid.Row="5" Grid.Column="1" Margin="10"/>
+                            <TextBox x:Name="txtTelefoon" Grid.Row="5" Grid.Column="1" Margin="10"/>
                             <Label Grid.Row="6" Grid.Column="0" Content="Foto" Margin="10"/>
                             <Button Grid.Row="6" Grid.Column="1" Content="SELECTEER" Width="80" HorizontalAlignment="Left" Margin="10"/>
                             <Label Grid.Row="6" Grid.Column="1" Content="(geen geselecteerd)" HorizontalAlignment="Center" Margin="10"/>
