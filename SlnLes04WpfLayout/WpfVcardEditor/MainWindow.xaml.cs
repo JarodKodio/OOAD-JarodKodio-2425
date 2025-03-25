@@ -22,10 +22,10 @@ namespace WpfVcardEditor
         {
             InitializeComponent();
         }
-
         private string currentFilePath = null;
         private bool isChanged = false;
 
+        // applicatie afsluiten
         private void ExitItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
@@ -39,12 +39,14 @@ namespace WpfVcardEditor
             }
         }
 
+        // about window openen
         private void OpenAboutWindow_Click(object sender, RoutedEventArgs e)
         {
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Show();
         }
 
+        // vcf files openen
         private void OpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -74,12 +76,14 @@ namespace WpfVcardEditor
                 { // use general Exception as fallback
                     MessageBox.Show("Er is een onverwachte fout opgetreden", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
+                // loop door de regels van het bestand
                 foreach (string regel in regels)
                 {
                     if (regel.Contains("N;"))
                     {
                         string naamRegel = regel.Replace("N;CHARSET=UTF-8:", "");
-                        string[] naam = naamRegel.Split(';');
+                        string[] naam = naamRegel.Split(';'); // splits op ;
 
                         if (naam.Length >= 2)
                         {
@@ -90,7 +94,7 @@ namespace WpfVcardEditor
                     else if (regel.Contains("FN;"))
                     {
                         string naamRegel = regel.Replace("FN;CHARSET=UTF-8:", "");
-                        string[] naam = naamRegel.Split(' ');
+                        string[] naam = naamRegel.Split(' '); // split op spatie
 
                         if (naam.Length >= 2)
                         {
@@ -140,6 +144,7 @@ namespace WpfVcardEditor
             }
         }
 
+        // vcf files opslaan als
         private void SaveAsFile_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -154,6 +159,7 @@ namespace WpfVcardEditor
                     string filePath = dialog.FileName;
                     List<string> vcardContent = CreateVcardContent();
 
+                    // schrijf de vcard content naar het bestand
                     File.WriteAllLines(dialog.FileName, vcardContent);
                     currentFilePath = filePath;
 
@@ -173,6 +179,8 @@ namespace WpfVcardEditor
                 MessageBox.Show("Er is een onverwachte fout opgetreden", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        // vcf files opslaan
         private void SaveFile_Click(object sender, RoutedEventArgs e)
         {
             if (currentFilePath != null)
@@ -190,6 +198,7 @@ namespace WpfVcardEditor
             btnSave.IsEnabled = false;
         }
 
+        // event handler voor alle textboxes en comboboxes
         private void Card_Changed(object sender, EventArgs e)
         {
             isChanged = true;
@@ -322,7 +331,6 @@ namespace WpfVcardEditor
                 return null;
             }
         }
-
 
         // Deze methode zet een BitmapImage om naar een Base64 string -CHAT GPT
         private string GetBase64FromImage(Image image)

@@ -69,9 +69,9 @@
                             <TextBox x:Name="txtTelefoon" Grid.Row="5" Grid.Column="1" Margin="10" TextChanged="Card_Changed"/>
                             <Label Grid.Row="6" Grid.Column="0" Content="Foto" Margin="10"/>
                             <Button Grid.Row="6" Grid.Column="1" Content="SELECTEER" Width="80" HorizontalAlignment="Left" Margin="10" Click="SelectImage_Click"/>
-                            <Label x:Name="lblFotoPath" Grid.Row="6" Grid.Column="1" Content="(geen geselecteerd)" HorizontalAlignment="Center" Margin="10"/>
+                            <Label x:Name="lblFotoPath" Grid.Row="6" Grid.Column="1" Content="(geen geselecteerd)" HorizontalAlignment="Center" Margin="10" />
                             <Border Grid.Row="7" Grid.Column="1"  BorderBrush="LightGray" BorderThickness="2"  HorizontalAlignment="Right" Width="100" Height="100">
-                                <Image x:Name="imgProfielfoto" Stretch="UniformToFill"/>
+                                <Image x:Name="imgProfielfoto" Stretch="UniformToFill" />
                             </Border>
                         </Grid>
                     </TabItem>
