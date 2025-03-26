@@ -43,7 +43,6 @@ public class Deck
             throw new InvalidOperationException("De stapel is leeg");
         }
 
-        // Hulp ai gebruik gemaakt van verwijzingen
         Kaart kaart = Kaarten[0];
         Kaarten.RemoveAt(0);
         return kaart;
