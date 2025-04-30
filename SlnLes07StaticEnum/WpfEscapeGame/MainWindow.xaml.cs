@@ -32,22 +32,34 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         // define room
-        Room room1 = new Room()
+        Room bedroom = new Room()
         {
             Name = "bedroom",
-            Description = "I seem to be in a medium sized bedroom.There is a locker to the left,a nice rugon the floor,and a bed to the right. "
+            Description = "I seem to be in a medium sized bedroom.There is a locker to the left,a nice rugon the floor,and a bed to the right. ",
+            Image = new ()
+            {
+                Source = new BitmapImage(new Uri("media/ss-bedroom.png", UriKind.Relative))
+            }
         };
 
-        Room room2 = new Room()
+        Room livingroom = new Room()
         {
             Name = "living room",
-            Description = "The living room is a place in the house where we can chill."
+            Description = "The living room is a place in the house where we can chill.",
+            Image = new ()
+            {
+                Source = new BitmapImage(new Uri("media/ss-living.png", UriKind.Relative))
+            }
         };
 
-        Room room3 = new Room()
+        Room computerroom = new Room()
         {
             Name = "computer room",
-            Description = "The computer room is a place in the house where we can work for school."
+            Description = "The computer room is a place in the house where we can work for school.",
+            Image = new ()
+            {
+                Source = new BitmapImage(new Uri("media/ss-computer.png", UriKind.Relative))
+            }
         };
 
         // define items
@@ -131,24 +143,24 @@ public partial class MainWindow : Window
         bed.HiddenItem = key1;
 
         // setup bedroom
-        room1.Items.Add(new Item()
+        bedroom.Items.Add(new Item()
         {
             Name = "floor mat",
             Description = "A bit ragged floor mat, but still one of the most popular designs. "
         });
-        room1.Items.Add(bed);
-        room1.Items.Add(locker);
+        bedroom.Items.Add(bed);
+        bedroom.Items.Add(locker);
 
         // setup living room
-        room2.Items.Add(sofa);
-        room2.Items.Add(plant);
-        room2.Items.Add(floormat);
+        livingroom.Items.Add(sofa);
+        livingroom.Items.Add(plant);
+        livingroom.Items.Add(floormat);
 
         // setup computer room
-        room3.Items.Add(computer);
-        room3.Items.Add(heater);
-        room3.Items.Add(chair);
-        room3.Items.Add(poster);
+        computerroom.Items.Add(computer);
+        computerroom.Items.Add(heater);
+        computerroom.Items.Add(chair);
+        computerroom.Items.Add(poster);
 
         // setup doors
         // door from bedroom to living room
@@ -156,9 +168,7 @@ public partial class MainWindow : Window
         {
             Name = "living room door",
             Description = "A door to the living room",
-            IsLocked = true,
-            Key = key2,
-            ToRoom = room2
+            ToRoom = livingroom
         };
 
         // door from living to computer room
@@ -166,8 +176,7 @@ public partial class MainWindow : Window
         {
             Name = "computer room door",
             Description = "A door to the computer room",
-            IsLocked = false,
-            ToRoom = room3
+            ToRoom = computerroom
         };
 
         // door from computer to living room
@@ -175,8 +184,7 @@ public partial class MainWindow : Window
         {
             Name = "living room door",
             Description = "A door to the living room",
-            IsLocked = false,
-            ToRoom = room2
+            ToRoom = livingroom
         };
 
         // door from living to bedroom
@@ -184,18 +192,17 @@ public partial class MainWindow : Window
         {
             Name = "bedroom door",
             Description = "A door to the bedroom",
-            IsLocked = false,
-            ToRoom = room1
+            ToRoom = bedroom
         };
 
         // add doors to rooms
-        room1.Doors.Add(bedroomToLiving);
-        room2.Doors.Add(livingToComputer);
-        room2.Doors.Add(livingToBedroom);
-        room3.Doors.Add(computerToLiving);
+        bedroom.Doors.Add(bedroomToLiving);
+        livingroom.Doors.Add(livingToComputer);
+        livingroom.Doors.Add(livingToBedroom);
+        computerroom.Doors.Add(computerToLiving);
 
         // start game
-        currentRoom = room1;
+        currentRoom = bedroom;
         txtMessage.Text = "I am awake, but remember who I am!? Must have been a hell of party last night... ";
         txtRoomDesc.Text = currentRoom.Description;
         UpdateUI();
@@ -211,12 +218,15 @@ public partial class MainWindow : Window
         {
             lstRoomItems.Items.Add(itm);
         }
-        
+
         lstRoomDoor.Items.Clear();
         foreach (Door door in currentRoom.Doors)
         {
             lstRoomDoor.Items.Add(door);
         }
+
+        // update img
+        imgRoom.Source = currentRoom.Image.Source;
     }
 
     private void LstItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -225,7 +235,6 @@ public partial class MainWindow : Window
         btnPickUp.IsEnabled = lstRoomItems.SelectedValue != null; // room item selected
         btnUseOn.IsEnabled = lstRoomItems.SelectedValue != null && lstMyItems.SelectedValue != null; // room item and picked up item selected
     }
-
 
     private void BtnCheck_Click(object sender, RoutedEventArgs e)
     {
@@ -282,7 +291,7 @@ public partial class MainWindow : Window
         if (!selItem.IsPortable)
         {
             txtMessage.Text = RandomMessageGenerator.GetRandomMessage(MessageType.CantPickUp) + selItem.Name;
-        } 
+        }
         else
         {
             // 2. add item to your items list
@@ -297,6 +306,7 @@ public partial class MainWindow : Window
     {
         // 1. find selected item
         Item selItem = (Item)lstRoomItems.SelectedItem;
+
         // is it portbable?
         if (!selItem.IsPortable)
         {
@@ -312,16 +322,35 @@ public partial class MainWindow : Window
         }
     }
 
+    private void BtnDrop_Click(object sender, RoutedEventArgs e)
+    {
+        // 1. find selected item
+        Item selItem = (Item)lstMyItems.SelectedItem;
+
+        // 2. add item to your items list
+        txtMessage.Text = $"I just dropped the {selItem.Name}. ";
+        lstRoomItems.Items.Add(selItem);
+        lstMyItems.Items.Remove(selItem);
+        currentRoom.Items.Add(selItem);
+    }
+
+    private void LstRoomDoor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        btnEnter.IsEnabled = lstRoomDoor.SelectedValue != null; // room item selected
+    }
+
     private void BtnEnter_Click(object sender, RoutedEventArgs e)
     {
         // 1. find selected door
         Door selDoor = (Door)lstRoomDoor.SelectedItem;
+
         // 2. is it locked?
         if (selDoor.IsLocked)
         {
             txtMessage.Text = RandomMessageGenerator.GetRandomMessage(MessageType.Locked);
             return;
         }
+
         // 3. go to next room
         currentRoom = selDoor.ToRoom;
         txtRoomDesc.Text = currentRoom.Description;

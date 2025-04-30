@@ -9,10 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="media\ss-bedroom.png" />
+    <None Remove="media\ss-computer.png" />
+    <None Remove="media\ss-living.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="media\ss-bedroom.png" />
+    <Resource Include="media\ss-computer.png" />
+    <Resource Include="media\ss-living.png" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:local="clr-namespace:WpfEscapeGame"
        mc:Ignorable="d"
-       Title="MainWindow" Height="450" Width="800">
+       Title="MainWindow" Height="550" Width="800">
    <Grid>
        <Grid.ColumnDefinitions>
            <ColumnDefinition Width="*" />
@@ -33,10 +33,11 @@
        <TextBlock Text="Picked up items" Grid.Row="2" Grid.Column="2" Margin="20,10" VerticalAlignment="Top" />
        <ListBox x:Name="lstMyItems" Grid.Row="2" Grid.Column="2" Margin="20, 40, 20, 30" SelectionChanged="LstItems_SelectionChanged"/>
        <TextBlock Text="Room doors" Grid.Row="3" Margin="20, 10" VerticalAlignment="Top"/>
-       <ListBox x:Name="lstRoomDoor" Grid.Row="3" Margin="20, 40, 20, 30" SelectionChanged="LstDoor_SelectionChanged" Height="50"/>
+       <ListBox x:Name="lstRoomDoor" Grid.Row="3" Margin="20, 40, 20, 30" Height="50" SelectionChanged="LstRoomDoor_SelectionChanged"/>
        <StackPanel Grid.Row="3" Grid.Column="1" >
            <Button x:Name="btnOpenWith" Content="&lt;- OPEN WITH" Height="35" Margin="5" Width="160" IsEnabled="False" Click="BtnOpenWith_Click"/>
            <Button x:Name="btnEnter" Content="ENTER &gt;&gt;" Height="35" Margin="5" Width="160" IsEnabled="False" Click="BtnEnter_Click"/>
        </StackPanel>
-   </Grid>
+        <Image x:Name="imgRoom" Grid.Row="3" Grid.Column="3" Margin="20, 10" Stretch="Uniform" />
+    </Grid>
 </Window>
