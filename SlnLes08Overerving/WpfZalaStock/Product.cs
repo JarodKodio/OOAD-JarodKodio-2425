@@ -13,7 +13,10 @@ namespace WpfZalaStock
         Blauw,
         Geel,
         Wit,
-        Zwart
+        Zwart,
+        Bruin,
+        Goud,
+        Zilver,
     }
     class Product
     {
@@ -35,12 +38,18 @@ namespace WpfZalaStock
         {
             return $"{Naam} ({Merk}) - {Prijs} EUR - {Kleur} - {AantalInStock} in stock";
         }
-        public int Verkoop(int aantal) 
-        { 
+        public int Verkoop(int aantal)
+        {
+            if (aantal > AantalInStock)
+                throw new InvalidOperationException("Niet genoeg voorraad beschikbaar.");
+            AantalInStock -= aantal;
+            return AantalInStock;
         }
 
         public int Retourneer(int aantal)
         {
+            AantalInStock += aantal;
+            return AantalInStock;
         }
 
     }

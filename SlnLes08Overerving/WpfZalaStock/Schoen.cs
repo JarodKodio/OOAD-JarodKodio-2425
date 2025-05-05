@@ -6,21 +6,43 @@ using System.Threading.Tasks;
 
 namespace WpfZalaStock
 {
+    enum Breedte
+    {
+        Smal,
+        Normaal,
+        Wijd
+    }
+
+    enum Sluiting
+    {
+        Veters,
+        Rits,
+        Klittenband
+    }
+
+    enum Neus
+    {
+        Rond,
+        Puntig,
+        Vierkant
+    }
     class Schoen : Product
     {
-        public string Maat { get; set; }
-        public string Materiaal { get; set; }
-        public Schoen(string naam, string merk, double prijs, Kleur kleur, int aantalInStock, string maat, string materiaal)
+        public Breedte Breedte { get; set; }
+        public Sluiting Sluiting { get; set; }
+        public Neus Neus { get; set; }
+
+        public Schoen(string naam, string merk, double prijs, Kleur kleur, int aantalInStock, Breedte breedte, Sluiting sluiting, Neus neus)
             : base(naam, merk, prijs, kleur, aantalInStock)
         {
-            Maat = maat;
-            Materiaal = materiaal;
+            Breedte = breedte;
+            Sluiting = sluiting;
+            Neus = neus;
         }
+
         public override string ToString()
         {
-            return $"{base.ToString()} - Maat: {Maat} - Materiaal: {Materiaal}";
+            return $"{base.ToString()} - Breedte: {Breedte} - Sluiting: {Sluiting} - Neus: {Neus}";
         }
-    }
-    {
     }
 }

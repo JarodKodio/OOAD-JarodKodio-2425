@@ -48,18 +48,16 @@ namespace WpfButtons
             }
             else 
             {
-                Count--;
-                if (Count < Min)
+                Count = Max;
+                if (Count > Min)
                 {
-                    if (Loop)
-                        Count = Max;
-                    else
-                        Count = Min;
+                    Count--;
                 }
             }
 
+            // Update de tekst van de knop
             this.Content = $"{Prefix} {Count}";
-            base.OnClick(); // Zorgt voor standaard button-gedrag
+            base.OnClick();
         }
 
         private void CounterButton_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

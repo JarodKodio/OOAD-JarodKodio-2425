@@ -6,7 +6,72 @@
         xmlns:local="clr-namespace:WpfZalaStock"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10">
+        <!-- Grid Definitie -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header -->
+            <RowDefinition Height="*"/>
+            <!-- Content -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <!-- Linkerkolom: Categorie & Producten -->
+            <ColumnDefinition Width="2*"/>
+            <!-- Middenkolom: Details -->
+            <ColumnDefinition Width="3*"/>
+            <!-- Rechterkolom: Verkocht & Geretourneerd -->
+        </Grid.ColumnDefinitions>
 
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,10">
+            <Image Source="/WpfZalaStock startmateriaal/zala.jpg" Height="50" Margin="0,0,10,0" DockPanel.Dock="Left"/>
+        </DockPanel>
+
+        <!-- Linkerkolom -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Categorie:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox Width="150" SelectedIndex="0" x:Name="CategorieComboBox">
+                    <ComboBoxItem Content="Alle" />
+                    <ComboBoxItem Content="Kleding" />
+                    <ComboBoxItem Content="Schoenen" />
+                    <ComboBoxItem Content="Sieraden" />
+                </ComboBox>
+            </StackPanel>
+            <TextBlock Text="Beschikbare producten:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <ListBox x:Name="ProductListBox" SelectionChanged="ProductListBox_SelectionChanged">
+                <!-- Lijst met producten -->
+            </ListBox>
+        </StackPanel>
+
+        <!-- Middenkolom -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+            <TextBlock Text="Productdetails:" FontWeight="Bold"/>
+            <TextBlock Text="Selecteer een product..." Margin="0,5,0,15" Name="ProductDetailsTextBlock"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Aantal:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Width="50" Name="AantalTextBox"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Verkopen" Background="Orange" Foreground="White" Width="100" Margin="0,0,10,0" Name="VerkoopButton" Click="VerkoopButton_Click"/>
+                <Button Content="Retourneren" Background="Orange" Foreground="White" Width="100" Name="RetourButton" Click="RetourButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Rechterkolom -->
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="10">
+            <TextBlock Text="Verkocht:" FontWeight="Bold"/>
+            <TextBox Height="100" VerticalScrollBarVisibility="Auto" BorderBrush="Orange" BorderThickness="1" Margin="0,5,0,15" Name="VerkochtTextBox"/>
+            <TextBlock Text="Geretourneerd:" FontWeight="Bold"/>
+            <TextBox Height="100" VerticalScrollBarVisibility="Auto" BorderBrush="Orange" BorderThickness="1" Name="GeretourneerdTextBox"/>
+        </StackPanel>
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,10">
+            <TextBlock x:Name="TotaalVerkochtTextBlock" Text="Totaalbedrag verkopen: € 0,00"/>
+            <TextBlock x:Name="TotaalRetourTextBlock" Text="Totaalbedrag retours: -€ 0,00"/>
+            <TextBlock x:Name="TotaalTextBlock" Text="Totaalbedrag: € 0,00"/>
+        </StackPanel>
     </Grid>
 </Window>

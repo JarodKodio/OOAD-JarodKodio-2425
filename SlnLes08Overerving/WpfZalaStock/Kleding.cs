@@ -6,19 +6,40 @@ using System.Threading.Tasks;
 
 namespace WpfZalaStock
 {
+    enum Pasvorm
+    {
+        Slim,
+        Fitted,
+        Straight,
+        Relaxed,
+        Regular,
+        Baggy,
+        Bootcut,
+        Tapered,
+        Flared
+    }
+
+    enum Lengte
+    {
+        Kort,
+        Normaal,
+        Lang
+    }
     class Kleding : Product
     {
-        public string Maat { get; set; }
-        public string Materiaal { get; set; }
-        public Kleding(string naam, string merk, double prijs, Kleur kleur, int aantalInStock, string maat, string materiaal)
+        public Pasvorm Pasvorm { get; set; }
+        public Lengte Lengte { get; set; }
+
+        public Kleding(string naam, string merk, double prijs, Kleur kleur, int aantalInStock, Pasvorm pasvorm, Lengte lengte)
             : base(naam, merk, prijs, kleur, aantalInStock)
         {
-            Maat = maat;
-            Materiaal = materiaal;
+            Pasvorm = pasvorm;
+            Lengte = lengte;
         }
+
         public override string ToString()
         {
-            return $"{base.ToString()} - Maat: {Maat} - Materiaal: {Materiaal}";
+            return $"{base.ToString()} - Pasvorm: {Pasvorm} - Lengte: {Lengte}";
         }
     }
 }

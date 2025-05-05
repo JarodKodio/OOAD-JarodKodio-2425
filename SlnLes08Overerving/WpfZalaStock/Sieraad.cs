@@ -16,12 +16,17 @@ namespace WpfZalaStock
     }
     class Sieraad : Product
     {
-        public Sieraad(string naam, string beschrijving, double prijs, string maat, string kleur) : base(naam, beschrijving, prijs)
+        public List<Materiaal> Materialen { get; set; }
+
+        public Sieraad(string naam, string merk, double prijs, Kleur kleur, int aantalInStock, List<Materiaal> materialen)
+            : base(naam, merk, prijs, kleur, aantalInStock)
         {
-            Maat = maat;
-            Kleur = kleur;
+            Materialen = materialen;
         }
-        public string Maat { get; set; }
-        public string Kleur { get; set; }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()} - Materialen: {string.Join(", ", Materialen)}";
+        }
     }
 }
