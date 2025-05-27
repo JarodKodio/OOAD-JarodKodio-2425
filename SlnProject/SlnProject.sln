@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLBenchmarkTool", "CLBenchmarkTool\CLBenchmarkTool.csproj", "{B610AEBA-19EB-4154-95DE-8B09EB26A271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAdmin", "WpfAdmin\WpfAdmin.csproj", "{F792BC44-5A55-4E6B-9EBD-EEAB56BC52AD}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B610AEBA-19EB-4154-95DE-8B09EB26A271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B610AEBA-19EB-4154-95DE-8B09EB26A271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B610AEBA-19EB-4154-95DE-8B09EB26A271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B610AEBA-19EB-4154-95DE-8B09EB26A271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F792BC44-5A55-4E6B-9EBD-EEAB56BC52AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F792BC44-5A55-4E6B-9EBD-EEAB56BC52AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F792BC44-5A55-4E6B-9EBD-EEAB56BC52AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F792BC44-5A55-4E6B-9EBD-EEAB56BC52AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
