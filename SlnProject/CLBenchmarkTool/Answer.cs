@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Data.SqlClient;
 namespace BenchmarkToolLibrary.Models
 {
     public class Answer
@@ -12,7 +14,7 @@ namespace BenchmarkToolLibrary.Models
         public int YearreportId { get; set; }
         public string Value { get; set; }
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
         // Lege constructor
         public Answer()
@@ -31,6 +33,7 @@ namespace BenchmarkToolLibrary.Models
 
         public void Update()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -48,6 +51,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static void Delete(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -59,6 +63,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static List<Answer> GetAll()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             List<Answer> answers = new List<Answer>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -84,6 +89,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static Answer? GetById(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Data.SqlClient;
 namespace BenchmarkToolLibrary.Models
 {
     public class Cost
@@ -13,7 +15,7 @@ namespace BenchmarkToolLibrary.Models
         public int CategoryNr { get; set; }
         public int YearreportId { get; set; }
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
         // Lege constructor voor databinding
         public Cost()
@@ -34,6 +36,7 @@ namespace BenchmarkToolLibrary.Models
 
         public void Update()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -52,6 +55,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static void Delete(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -63,6 +67,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static List<Cost> GetAll()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             List<Cost> costs = new List<Cost>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -89,6 +94,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static Cost? GetById(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

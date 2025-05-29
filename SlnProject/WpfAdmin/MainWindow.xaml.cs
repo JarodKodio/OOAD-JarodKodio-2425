@@ -16,9 +16,20 @@ namespace WpfAdmin
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static bool IsAdminLoggedIn { get; set; } = false;
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new LoginPage(MainFrame));
+        }
+
+        private void NavToHome(object sender, RoutedEventArgs e) => MainFrame.Navigate(new AdminHomePage());
+        private void NavToBedrijven(object sender, RoutedEventArgs e) => MainFrame.Navigate(new BedrijvenBeheerPage());
+        private void NavToRegistraties(object sender, RoutedEventArgs e) => MainFrame.Navigate(new RegistratiesPage());
+        private void NavToLogin(object sender, RoutedEventArgs e)
+        {
+            IsAdminLoggedIn = false;
+            MainFrame.Navigate(new LoginPage(MainFrame));
         }
     }
 }

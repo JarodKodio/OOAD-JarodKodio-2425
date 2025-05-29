@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Data.SqlClient;
 namespace BenchmarkToolLibrary.Models
 {
     public class Yearreport
@@ -10,8 +12,8 @@ namespace BenchmarkToolLibrary.Models
         public int Id { get; set; }
         public int Year { get; set; }
         public int CompanyId { get; set; }
-
-        private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
+        
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
         // Lege constructor
         public Yearreport()
@@ -29,6 +31,7 @@ namespace BenchmarkToolLibrary.Models
 
         public void Update()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -45,6 +48,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static void Delete(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -56,6 +60,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static List<Yearreport> GetAll()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             List<Yearreport> list = new List<Yearreport>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -80,6 +85,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static Yearreport? GetById(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

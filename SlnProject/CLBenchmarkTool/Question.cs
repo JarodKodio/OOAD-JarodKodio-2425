@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Data.SqlClient;
 namespace BenchmarkToolLibrary.Models
 {
     public class Question
@@ -14,10 +16,9 @@ namespace BenchmarkToolLibrary.Models
         public bool Active { get; set; }
         public int CategoryNr { get; set; }
         public string CosttypeType { get; set; }
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
-
-        // Lege constructor
+        // Lege constructor  
         public Question()
         {
             Text = string.Empty;
@@ -26,7 +27,7 @@ namespace BenchmarkToolLibrary.Models
             CosttypeType = string.Empty;
         }
 
-        // Constructor voor ophalen uit database
+        // Constructor voor ophalen uit database  
         public Question(int id, string text, string textFr, string textEn, bool active, int categoryNr, string costtypeType)
         {
             Id = id;
@@ -40,6 +41,7 @@ namespace BenchmarkToolLibrary.Models
 
         public void Update()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -60,6 +62,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static void Delete(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -71,6 +74,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static List<Question> GetAll()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             List<Question> list = new List<Question>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -99,6 +103,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static Question? GetById(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

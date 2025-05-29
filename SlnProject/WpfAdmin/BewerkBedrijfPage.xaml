@@ -1,0 +1,20 @@
+﻿<Page x:Class="WpfAdmin.BewerkBedrijfPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfAdmin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BewerkBedrijfPage">
+
+    <StackPanel Margin="20">
+        <TextBlock Text="Bedrijfsgegevens bewerken" FontSize="20" />
+        <TextBox x:Name="txtNaam" Margin="0,5" Width="200" />
+        <TextBox x:Name="txtContact" Margin="0,5" Width="200"/>
+        <TextBox x:Name="txtEmail" Margin="0,5" Width="200" />
+        <TextBox x:Name="txtStatus" Margin="0,5" Width="200" />
+        <Button Content="Logo uploaden" Margin="0,10,0,0" Width="100" />
+        <Button Content="Opslaan" Width="100" Margin="0,10,0,0" Click="Opslaan_Click"/>
+    </StackPanel>
+</Page>

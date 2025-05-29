@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
-
+using Microsoft.Data.SqlClient;
 namespace BenchmarkToolLibrary.Models
 {
     public class Company
@@ -28,8 +28,7 @@ namespace BenchmarkToolLibrary.Models
         public string Language { get; set; }
         public byte[] Logo { get; set; }
         public string NacecodeCode { get; set; }
-
-        private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
         // Lege constructor
         public Company()
@@ -103,9 +102,46 @@ namespace BenchmarkToolLibrary.Models
                 Status = newStatus;
             }
         }
-
+        public static List<Company> GetAll()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            List<Company> companies = new List<Company>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Companies", conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Company c = new Company(
+    (int)reader["id"],
+    (string)reader["name"],
+    (string)reader["contact"],
+    (string)reader["address"],
+    (string)reader["zip"],
+    (string)reader["city"],
+    (string)reader["country"],
+    (string)reader["phone"],
+    (string)reader["email"],
+    (string)reader["btw"],
+    (string)reader["login"],
+    (string)reader["password"],
+    (DateTime)reader["regdate"],
+    reader["acceptdate"] == DBNull.Value ? null : (DateTime?)reader["acceptdate"],
+    reader["lastmodified"] == DBNull.Value ? null : (DateTime?)reader["lastmodified"],
+    (string)reader["status"],
+    (string)reader["language"],
+    reader["logo"] == DBNull.Value ? Array.Empty<byte>() : (byte[])reader["logo"],
+    (string)reader["nacecode_code"]
+);
+                    companies.Add(c);
+                }
+            }
+            return companies;
+        }
         public void Update()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -138,6 +174,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static void Delete(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

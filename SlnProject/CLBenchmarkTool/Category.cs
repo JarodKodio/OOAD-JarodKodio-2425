@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.Data.SqlClient;
 namespace CLBenchmarkTool
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Configuration;
-
-    namespace BenchmarkToolLibrary.Models
-    {
         public class Category
         {
             public int Nr { get; set; }
@@ -24,8 +19,7 @@ namespace CLBenchmarkTool
             public string TooltipEn { get; set; }
             public string RelevantCostTypes { get; set; }
             public int? ParentNr { get; set; }
-
-            private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
+            private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
             // Lege constructor voor databinding
             public Category()
@@ -55,6 +49,7 @@ namespace CLBenchmarkTool
 
             public void Update()
             {
+                string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -77,6 +72,7 @@ namespace CLBenchmarkTool
 
             public static void Delete(int nr)
             {
+                string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkToolDB"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -88,6 +84,7 @@ namespace CLBenchmarkTool
 
             public static List<Category> GetAll()
             {
+                string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
                 List<Category> categories = new List<Category>();
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -107,8 +104,7 @@ namespace CLBenchmarkTool
                             (string)reader["tooltipFr"],
                             (string)reader["tooltipEn"],
                             (string)reader["relevantCostTypes"],
-                            reader["parent_nr"] == DBNull.Value ? null : (int?)reader["parent_nr"]
-                        );
+                            reader["parent_nr"] == DBNull.Value ? null : (int?)reader["parent_nr"]);
                         categories.Add(c);
                     }
                 }
@@ -118,6 +114,7 @@ namespace CLBenchmarkTool
 
             public static Category? GetByNr(int nr)
             {
+                string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -136,8 +133,7 @@ namespace CLBenchmarkTool
                             (string)reader["tooltipFr"],
                             (string)reader["tooltipEn"],
                             (string)reader["relevantCostTypes"],
-                            reader["parent_nr"] == DBNull.Value ? null : (int?)reader["parent_nr"]
-                        );
+                            reader["parent_nr"] == DBNull.Value ? null : (int?)reader["parent_nr"]);
                     }
                 }
 
@@ -151,4 +147,4 @@ namespace CLBenchmarkTool
         }
     }
 
-}
+

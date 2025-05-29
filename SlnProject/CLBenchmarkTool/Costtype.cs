@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Data.SqlClient;
 namespace BenchmarkToolLibrary.Models
 {
     public class Costtype
@@ -12,7 +14,7 @@ namespace BenchmarkToolLibrary.Models
         public string TextFr { get; set; }
         public string TextEn { get; set; }
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkDB"].ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
         // Lege constructor voor databinding
         public Costtype()
@@ -34,6 +36,7 @@ namespace BenchmarkToolLibrary.Models
 
         public void Update()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -51,6 +54,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static void Delete(string type)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -62,6 +66,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static List<Costtype> GetAll()
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             List<Costtype> list = new List<Costtype>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -87,6 +92,7 @@ namespace BenchmarkToolLibrary.Models
 
         public static Costtype? GetByType(string type)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
