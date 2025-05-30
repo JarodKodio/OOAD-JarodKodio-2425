@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfCompany
 {
@@ -25,30 +15,40 @@ namespace WpfCompany
         {
             if (!MainWindow.IsCompanyLoggedIn)
             {
-                System.Windows.MessageBox.Show("Je moet eerst inloggen.");
+                MessageBox.Show("Je moet eerst inloggen.");
                 NavigationService?.Navigate(new LoginPage(null));
                 return;
             }
+
             InitializeComponent();
 
-            if (MainWindow.LoggedInCompany != null)
+            try
             {
-                byte[] logoData = MainWindow.LoggedInCompany.Logo;
-
-                if (logoData != null && logoData.Length > 0)
+                if (MainWindow.LoggedInCompany != null)
                 {
-                    BitmapImage? logo = ByteArrayToImage(logoData);
-                    if (logo != null)
+                    byte[] logoData = MainWindow.LoggedInCompany.Logo;
+
+                    if (logoData != null && logoData.Length > 0)
                     {
-                        imgLogo.Source = logo;
-                        return;
+                        BitmapImage? logo = ByteArrayToImage(logoData);
+                        if (logo != null)
+                        {
+                            imgLogo.Source = logo;
+                            return;
+                        }
                     }
+
+                    // Geen geldig logo of conversiefout
+                    imgLogo.Source = new BitmapImage(new Uri("pack://application:,,,/Images/placeholder.png"));
                 }
-
-                // Als geen geldig logo:
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het laden van het logo:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                imgLogo.Source = new BitmapImage(new Uri("pack://application:,,,/Images/placeholder.png"));
             }
         }
+
         private BitmapImage? ByteArrayToImage(byte[] data)
         {
             if (data == null || data.Length == 0) return null;
@@ -68,7 +68,7 @@ namespace WpfCompany
             }
             catch
             {
-                return null;
+                return null; // veilig terugvallen in hoofdcode
             }
         }
     }

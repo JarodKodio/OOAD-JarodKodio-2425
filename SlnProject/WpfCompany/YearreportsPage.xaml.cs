@@ -1,24 +1,11 @@
 ﻿using BenchmarkToolLibrary.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfCompany
 {
-    /// <summary>
-    /// Interaction logic for YearreportsPage.xaml
-    /// </summary>
     public partial class YearreportsPage : Page
     {
         public YearreportsPage()
@@ -29,24 +16,47 @@ namespace WpfCompany
                 NavigationService?.Navigate(new LoginPage(null));
                 return;
             }
+
             InitializeComponent();
 
-            lstRapporten.ItemsSource = Yearreport.GetAll()
-                .Where(r => r.CompanyId == MainWindow.LoggedInCompany.Id)
-                .ToList();
+            try
+            {
+                lstRapporten.ItemsSource = Yearreport.GetAll()
+                    .Where(r => r.CompanyId == MainWindow.LoggedInCompany.Id)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het laden van de jaarrapporten:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Verwijderen_Click(object sender, RoutedEventArgs e)
         {
             if (lstRapporten.SelectedItem is Yearreport selected)
             {
-                MessageBoxResult result = MessageBox.Show($"Wil je jaarrapport voor {selected.Year} verwijderen?", "Bevestiging", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show(
+                    $"Wil je jaarrapport voor {selected.Year} verwijderen?",
+                    "Bevestiging",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
-                    Yearreport.Delete(selected.Id);
-                    lstRapporten.ItemsSource = Yearreport.GetAll()
-                        .Where(r => r.CompanyId == MainWindow.LoggedInCompany.Id)
-                        .ToList();
+                    try
+                    {
+                        Yearreport.Delete(selected.Id);
+
+                        lstRapporten.ItemsSource = Yearreport.GetAll()
+                            .Where(r => r.CompanyId == MainWindow.LoggedInCompany.Id)
+                            .ToList();
+
+                        MessageBox.Show("Rapport succesvol verwijderd.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Fout bij het verwijderen van het rapport:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else

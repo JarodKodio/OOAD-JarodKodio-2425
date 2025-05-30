@@ -34,6 +34,11 @@ namespace WpfAdmin
             {
                 MainWindow.IsAdminLoggedIn = true;
                 _mainFrame.Navigate(new AdminHomePage());
+                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.btnLogin.Content = "Uitloggen";
+                }
             }
             else
             {

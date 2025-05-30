@@ -35,6 +35,7 @@ namespace WpfCompany
             IsCompanyLoggedIn = false;
             LoggedInCompany = null;
             MainFrame.Navigate(new LoginPage(MainFrame));
+            btnLogin.Content = "Inloggen";
         }
     }
 }

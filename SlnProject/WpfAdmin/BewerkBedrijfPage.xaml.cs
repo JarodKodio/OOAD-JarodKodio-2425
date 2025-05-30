@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 
 namespace WpfAdmin
@@ -32,27 +21,34 @@ namespace WpfAdmin
                 NavigationService?.Navigate(new LoginPage(null));
                 return;
             }
-            {
-                InitializeComponent();
-                _bedrijf = bedrijf;
 
-                txtNaam.Text = _bedrijf.Name;
-                txtContact.Text = _bedrijf.Contact;
-                txtEmail.Text = _bedrijf.Email;
-                txtStatus.Text = _bedrijf.Status;
-            }
+            InitializeComponent();
+            _bedrijf = bedrijf;
+
+            txtNaam.Text = _bedrijf.Name;
+            txtContact.Text = _bedrijf.Contact;
+            txtEmail.Text = _bedrijf.Email;
+            txtStatus.Text = _bedrijf.Status;
         }
 
         private void Opslaan_Click(object sender, RoutedEventArgs e)
         {
-            _bedrijf.Name = txtNaam.Text;
-            _bedrijf.Contact = txtContact.Text;
-            _bedrijf.Email = txtEmail.Text;
-            _bedrijf.ChangeStatus(txtStatus.Text);
+            try
+            {
+                _bedrijf.Name = txtNaam.Text;
+                _bedrijf.Contact = txtContact.Text;
+                _bedrijf.Email = txtEmail.Text;
+                _bedrijf.ChangeStatus(txtStatus.Text);
 
-            _bedrijf.Update();
-            MessageBox.Show("Bedrijf succesvol bijgewerkt.");
+                _bedrijf.Update(); // SQL-call
+                MessageBox.Show("Bedrijf succesvol bijgewerkt.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het opslaan van het bedrijf:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
         private void UploadLogo_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog
@@ -60,10 +56,17 @@ namespace WpfAdmin
                 Filter = "Afbeeldingen|*.jpg;*.jpeg;*.png"
             };
 
-            if (dialog.ShowDialog() == true)
+            try
             {
-                _bedrijf.Logo = File.ReadAllBytes(dialog.FileName);
-                MessageBox.Show("Logo geselecteerd.");
+                if (dialog.ShowDialog() == true)
+                {
+                    _bedrijf.Logo = File.ReadAllBytes(dialog.FileName); // kan I/O error geven
+                    MessageBox.Show("Logo geselecteerd.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het laden van de afbeelding:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

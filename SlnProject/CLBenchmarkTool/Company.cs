@@ -74,7 +74,7 @@ namespace BenchmarkToolLibrary.Models
             NacecodeCode = nacecodeCode;
         }
         public static List<Company> GetAll()
-        {
+        { 
             string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             List<Company> companies = new List<Company>();
             using (SqlConnection conn = new SqlConnection(connectionString))

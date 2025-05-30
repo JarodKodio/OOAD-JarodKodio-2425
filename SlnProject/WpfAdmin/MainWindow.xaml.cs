@@ -30,6 +30,7 @@ namespace WpfAdmin
         {
             IsAdminLoggedIn = false;
             MainFrame.Navigate(new LoginPage(MainFrame));
+            btnLogin.Content = "Inloggen";
         }
     }
 }

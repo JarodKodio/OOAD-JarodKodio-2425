@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BenchmarkToolLibrary;
 using BenchmarkToolLibrary.Models;
 
 namespace WpfCompany
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
-    /// </summary>
     public partial class LoginPage : Page
     {
         private Frame _mainFrame;
@@ -35,17 +21,38 @@ namespace WpfCompany
             string loginInput = txtLogin.Text.Trim();
             string passwordInput = txtPassword.Password.Trim();
 
-            Company? company = Company.GetByLogin(loginInput);
-
-            if (company == null)
+            if (string.IsNullOrWhiteSpace(loginInput) || string.IsNullOrWhiteSpace(passwordInput))
             {
-                MessageBox.Show("Login niet gevonden: '" + loginInput + "'", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Vul zowel login als wachtwoord in.", "Ongeldige invoer", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            MainWindow.IsCompanyLoggedIn = true;
-            MainWindow.LoggedInCompany = company;
-            _mainFrame.Navigate(new CompanyHomePage());
+            try
+            {
+                Company? company = Company.GetByLogin(loginInput);
+
+                if (company == null)
+                {
+                    MessageBox.Show($"Login niet gevonden: '{loginInput}'", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Hier zou je wachtwoordcontrole doen als dat geïmplementeerd is
+
+                MainWindow.IsCompanyLoggedIn = true;
+                MainWindow.LoggedInCompany = company;
+
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.btnLogin.Content = "Uitloggen";
+                }
+
+                _mainFrame.Navigate(new CompanyHomePage());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het inloggen:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

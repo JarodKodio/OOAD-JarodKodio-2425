@@ -11,13 +11,42 @@
     <StackPanel Margin="20">
         <TextBlock Text="Bedrijfsgegevens bewerken" FontSize="20" Margin="0,0,0,10" />
 
-        <TextBox x:Name="txtNaam"  Margin="0,5" Width="200"/>
-        <TextBox x:Name="txtContact"  Margin="0,5" Width="200"/>
-        <TextBox x:Name="txtEmail" Margin="0,5" Width="200"/>
-        <TextBox x:Name="txtTelefoon" Margin="0,5" Width="200"/>
-        <TextBox x:Name="txtAdres" Margin="0,5" Width="200"/>
-        <PasswordBox x:Name="txtWachtwoord" Margin="0,10" Width="200"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Button Content="Opslaan" Width="100" Margin="0,10,0,0" Click="Opslaan_Click" />
+            <TextBlock Text="Naam:" Grid.Row="0" Grid.Column="0" Margin="0,5"/>
+            <TextBox x:Name="txtNaam" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+
+            <TextBlock Text="Contactpersoon:" Grid.Row="1" Grid.Column="0" Margin="0,5"/>
+            <TextBox x:Name="txtContact" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+
+            <TextBlock Text="E-mail:" Grid.Row="2" Grid.Column="0" Margin="0,5"/>
+            <TextBox x:Name="txtEmail" Grid.Row="2" Grid.Column="1" Margin="0,5"/>
+
+            <TextBlock Text="Telefoonnummer:" Grid.Row="3" Grid.Column="0" Margin="0,5"/>
+            <TextBox x:Name="txtTelefoon" Grid.Row="3" Grid.Column="1" Margin="0,5"/>
+
+            <TextBlock Text="Adres:" Grid.Row="4" Grid.Column="0" Margin="0,5"/>
+            <TextBox x:Name="txtAdres" Grid.Row="4" Grid.Column="1" Margin="0,5"/>
+
+            <TextBlock Text="Nieuw wachtwoord:" Grid.Row="5" Grid.Column="0" Margin="0,5"/>
+            <PasswordBox x:Name="txtWachtwoord" Grid.Row="5" Grid.Column="1" Margin="0,5"/>
+
+            <Button Content="Opslaan" Width="100" Margin="0,10,0,0" Click="Opslaan_Click" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="1" />
+
+        </Grid>
+
     </StackPanel>
 </Page>

@@ -1,18 +1,8 @@
 ﻿using BenchmarkToolLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfCompany
 {
@@ -29,35 +19,57 @@ namespace WpfCompany
                 NavigationService?.Navigate(new LoginPage(null));
                 return;
             }
+
             InitializeComponent();
 
-            txtNaam.Text = MainWindow.LoggedInCompany.Name;
-            txtContact.Text = MainWindow.LoggedInCompany.Contact;
-            txtEmail.Text = MainWindow.LoggedInCompany.Email;
-            txtTelefoon.Text = MainWindow.LoggedInCompany.Phone;
-            txtAdres.Text = MainWindow.LoggedInCompany.Address;
-            txtWachtwoord.Password = "";
+            try
+            {
+                var bedrijf = MainWindow.LoggedInCompany;
+                txtNaam.Text = bedrijf.Name;
+                txtContact.Text = bedrijf.Contact;
+                txtEmail.Text = bedrijf.Email;
+                txtTelefoon.Text = bedrijf.Phone;
+                txtAdres.Text = bedrijf.Address;
+                txtWachtwoord.Password = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het laden van bedrijfsgegevens:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Opslaan_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.LoggedInCompany.Name = txtNaam.Text;
-            MainWindow.LoggedInCompany.Contact = txtContact.Text;
-            MainWindow.LoggedInCompany.Email = txtEmail.Text;
-            MainWindow.LoggedInCompany.Phone = txtTelefoon.Text;
-            MainWindow.LoggedInCompany.Address = txtAdres.Text;
-
-            if (!string.IsNullOrWhiteSpace(txtWachtwoord.Password))
+            try
             {
-                System.Reflection.PropertyInfo prop = typeof(Company).GetProperty("Password", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-                if (prop != null)
-                {
-                    prop.SetValue(MainWindow.LoggedInCompany, txtWachtwoord.Password);
-                }
-            }
+                var bedrijf = MainWindow.LoggedInCompany;
+                bedrijf.Name = txtNaam.Text;
+                bedrijf.Contact = txtContact.Text;
+                bedrijf.Email = txtEmail.Text;
+                bedrijf.Phone = txtTelefoon.Text;
+                bedrijf.Address = txtAdres.Text;
 
-            MainWindow.LoggedInCompany.Update();
-            MessageBox.Show("Gegevens opgeslagen.");
+                if (!string.IsNullOrWhiteSpace(txtWachtwoord.Password))
+                {
+                    // Gebruik reflectie om privé-wachtwoordveld te zetten
+                    PropertyInfo prop = typeof(Company).GetProperty("Password", BindingFlags.Instance | BindingFlags.NonPublic);
+                    if (prop != null)
+                    {
+                        prop.SetValue(bedrijf, txtWachtwoord.Password);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wachtwoord kon niet ingesteld worden (interne fout).");
+                    }
+                }
+
+                bedrijf.Update(); // SQL
+                MessageBox.Show("Gegevens succesvol opgeslagen.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij het opslaan van de gegevens:\n" + ex.Message, "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

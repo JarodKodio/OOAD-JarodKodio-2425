@@ -12,7 +12,7 @@
             <Button Content="Rapporten" Click="NavToRapporten" Margin="5" />
             <Button Content="Benchmark" Click="NavToBenchmark" Margin="5" />
             <Button Content="Gegevens" Click="NavToGegevens" Margin="5" />
-            <Button Content="Uitloggen" Click="NavToLogin" Margin="5" />
+            <Button Content="Inloggen" x:Name="btnLogin" Click="NavToLogin" Margin="5" />
         </StackPanel>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
     </DockPanel>

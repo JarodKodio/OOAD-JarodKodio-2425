@@ -7,7 +7,7 @@
             <Button Content="Home" Click="NavToHome" Margin="5" />
             <Button Content="Bedrijven" Click="NavToBedrijven" Margin="5" />
             <Button Content="Registraties" Click="NavToRegistraties" Margin="5" />
-            <Button Content="Uitloggen" Click="NavToLogin" Margin="5" />
+            <Button Content="Uitloggen" Click="NavToLogin" Margin="5" x:Name="btnLogin" />
         </StackPanel>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
     </DockPanel>
