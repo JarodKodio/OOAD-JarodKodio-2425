@@ -1,0 +1,19 @@
+﻿<Window x:Class="WpfCompany.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCompany"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="200" Background="LightGray">
+            <Button Content="Home" Click="NavToHome" Margin="5" />
+            <Button Content="Rapporten" Click="NavToRapporten" Margin="5" />
+            <Button Content="Benchmark" Click="NavToBenchmark" Margin="5" />
+            <Button Content="Gegevens" Click="NavToGegevens" Margin="5" />
+            <Button Content="Uitloggen" Click="NavToLogin" Margin="5" />
+        </StackPanel>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+    </DockPanel>
+</Window>

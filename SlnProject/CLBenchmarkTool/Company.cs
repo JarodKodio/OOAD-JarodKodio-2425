@@ -51,9 +51,7 @@ namespace BenchmarkToolLibrary.Models
         }
 
         // Constructor voor ophalen uit database
-        public Company(int id, string name, string contact, string address, string zip, string city, string country,
-                       string phone, string email, string btw, string login, string password, DateTime regDate,
-                       DateTime? acceptDate, DateTime? lastModified, string status, string language, byte[] logo, string nacecodeCode)
+        public Company(int id, string name, string contact, string address, string zip, string city, string country, string phone, string email, string btw, string login, string password, DateTime regDate, DateTime? acceptDate, DateTime? lastModified, string status, string language, byte[] logo, string nacecodeCode)
         {
             Id = id;
             Name = name;
@@ -74,33 +72,6 @@ namespace BenchmarkToolLibrary.Models
             Language = language;
             Logo = logo;
             NacecodeCode = nacecodeCode;
-        }
-
-        public bool CheckPassword(string plainText)
-        {
-            return HashPassword(plainText) == Password;
-        }
-
-        private string HashPassword(string plain)
-        {
-            using (SHA256 sha = SHA256.Create())
-            {
-                byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(plain));
-                StringBuilder sb = new StringBuilder();
-                foreach (byte b in hash)
-                {
-                    sb.Append(b.ToString("x2"));
-                }
-                return sb.ToString();
-            }
-        }
-
-        public void ChangeStatus(string newStatus)
-        {
-            if (newStatus == "active" || newStatus == "pending" || newStatus == "suspended" || newStatus == "rejected")
-            {
-                Status = newStatus;
-            }
         }
         public static List<Company> GetAll()
         {
@@ -132,12 +103,84 @@ namespace BenchmarkToolLibrary.Models
     (string)reader["status"],
     (string)reader["language"],
     reader["logo"] == DBNull.Value ? Array.Empty<byte>() : (byte[])reader["logo"],
-    (string)reader["nacecode_code"]
-);
+    (string)reader["nacecode_code"]);
                     companies.Add(c);
                 }
             }
             return companies;
+        }
+        public static Company? GetByLogin(string login)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Companies WHERE login = @login", conn);
+                cmd.Parameters.AddWithValue("@login", login);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Company(
+                        (int)reader["id"],
+                        (string)reader["name"],
+                        (string)reader["contact"],
+                        (string)reader["address"],
+                        (string)reader["zip"],
+                        (string)reader["city"],
+                        (string)reader["country"],
+                        (string)reader["phone"],
+                        (string)reader["email"],
+                        (string)reader["btw"],
+                        (string)reader["login"],
+                        (string)reader["password"],
+                        (DateTime)reader["regdate"],
+                        reader["acceptdate"] == DBNull.Value ? null : (DateTime?)reader["acceptdate"],
+                        reader["lastmodified"] == DBNull.Value ? null : (DateTime?)reader["lastmodified"],
+                        (string)reader["status"],
+                        (string)reader["language"],
+                        reader["logo"] == DBNull.Value ? Array.Empty<byte>() : (byte[])reader["logo"],
+                        (string)reader["nacecode_code"]);
+                }
+            }
+            return null;
+        }
+        public static void Delete(int id)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM Companies WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public bool CheckPassword(string plainText)
+        {
+            return HashPassword(plainText) == Password;
+        }
+
+        public string HashPassword(string plain)
+        {
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(plain));
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hash)
+                {
+                    sb.Append(b.ToString("X2")); // hoofdletters
+                }
+                return sb.ToString();
+            }
+        }
+
+        public void ChangeStatus(string newStatus)
+        {
+            if (newStatus == "active" || newStatus == "pending" || newStatus == "suspended" || newStatus == "rejected")
+            {
+                Status = newStatus;
+            }
         }
         public void Update()
         {
@@ -171,19 +214,6 @@ namespace BenchmarkToolLibrary.Models
                 cmd.ExecuteNonQuery();
             }
         }
-
-        public static void Delete(int id)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM Companies WHERE id = @id", conn);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
         public override string ToString()
         {
             return $"{Name} ({Login}) - Status: {Status}";

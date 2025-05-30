@@ -46,30 +46,6 @@ namespace CLBenchmarkTool
                 RelevantCostTypes = relevantCostTypes;
                 ParentNr = parentNr;
             }
-
-            public void Update()
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(
-                        "UPDATE Categories SET text=@text, textFr=@textFr, textEn=@textEn, tooltip=@tooltip, tooltipFr=@tooltipFr, tooltipEn=@tooltipEn, relevantCostTypes=@relevantCostTypes, parent_nr=@parentNr WHERE nr=@nr", conn);
-
-                    cmd.Parameters.AddWithValue("@text", Text);
-                    cmd.Parameters.AddWithValue("@textFr", TextFr);
-                    cmd.Parameters.AddWithValue("@textEn", TextEn);
-                    cmd.Parameters.AddWithValue("@tooltip", Tooltip);
-                    cmd.Parameters.AddWithValue("@tooltipFr", TooltipFr);
-                    cmd.Parameters.AddWithValue("@tooltipEn", TooltipEn);
-                    cmd.Parameters.AddWithValue("@relevantCostTypes", RelevantCostTypes);
-                    cmd.Parameters.AddWithValue("@parentNr", (object?)ParentNr ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@nr", Nr);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
             public static void Delete(int nr)
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["BenchmarkToolDB"].ConnectionString;
@@ -139,7 +115,28 @@ namespace CLBenchmarkTool
 
                 return null;
             }
+            public void Update()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Categories SET text=@text, textFr=@textFr, textEn=@textEn, tooltip=@tooltip, tooltipFr=@tooltipFr, tooltipEn=@tooltipEn, relevantCostTypes=@relevantCostTypes, parent_nr=@parentNr WHERE nr=@nr", conn);
 
+                cmd.Parameters.AddWithValue("@text", Text);
+                cmd.Parameters.AddWithValue("@textFr", TextFr);
+                cmd.Parameters.AddWithValue("@textEn", TextEn);
+                cmd.Parameters.AddWithValue("@tooltip", Tooltip);
+                cmd.Parameters.AddWithValue("@tooltipFr", TooltipFr);
+                cmd.Parameters.AddWithValue("@tooltipEn", TooltipEn);
+                cmd.Parameters.AddWithValue("@relevantCostTypes", RelevantCostTypes);
+                cmd.Parameters.AddWithValue("@parentNr", (object?)ParentNr ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@nr", Nr);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
             public override string ToString()
             {
                 return $"{Nr} - {Text}";

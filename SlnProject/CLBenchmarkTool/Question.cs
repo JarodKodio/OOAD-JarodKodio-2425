@@ -38,28 +38,6 @@ namespace BenchmarkToolLibrary.Models
             CategoryNr = categoryNr;
             CosttypeType = costtypeType;
         }
-
-        public void Update()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "UPDATE Questions SET text=@text, textFr=@textFr, textEn=@textEn, active=@active, category_nr=@categoryNr, costtype_type=@costtypeType WHERE id=@id", conn);
-
-                cmd.Parameters.AddWithValue("@text", Text);
-                cmd.Parameters.AddWithValue("@textFr", TextFr);
-                cmd.Parameters.AddWithValue("@textEn", TextEn);
-                cmd.Parameters.AddWithValue("@active", Active);
-                cmd.Parameters.AddWithValue("@categoryNr", CategoryNr);
-                cmd.Parameters.AddWithValue("@costtypeType", CosttypeType);
-                cmd.Parameters.AddWithValue("@id", Id);
-
-                cmd.ExecuteNonQuery();
-            }
-        }
-
         public static void Delete(int id)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
@@ -92,8 +70,7 @@ namespace BenchmarkToolLibrary.Models
                         (string)reader["textEn"],
                         (bool)reader["active"],
                         (int)reader["category_nr"],
-                        (string)reader["costtype_type"]
-                    );
+                        (string)reader["costtype_type"]);
                     list.Add(q);
                 }
             }
@@ -120,14 +97,32 @@ namespace BenchmarkToolLibrary.Models
                         (string)reader["textEn"],
                         (bool)reader["active"],
                         (int)reader["category_nr"],
-                        (string)reader["costtype_type"]
-                    );
+                        (string)reader["costtype_type"]);
                 }
             }
 
             return null;
         }
+        public void Update()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Questions SET text=@text, textFr=@textFr, textEn=@textEn, active=@active, category_nr=@categoryNr, costtype_type=@costtypeType WHERE id=@id", conn);
 
+                cmd.Parameters.AddWithValue("@text", Text);
+                cmd.Parameters.AddWithValue("@textFr", TextFr);
+                cmd.Parameters.AddWithValue("@textEn", TextEn);
+                cmd.Parameters.AddWithValue("@active", Active);
+                cmd.Parameters.AddWithValue("@categoryNr", CategoryNr);
+                cmd.Parameters.AddWithValue("@costtypeType", CosttypeType);
+                cmd.Parameters.AddWithValue("@id", Id);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         public override string ToString()
         {
             return $"Q{Id}: {Text} (Active: {Active})";

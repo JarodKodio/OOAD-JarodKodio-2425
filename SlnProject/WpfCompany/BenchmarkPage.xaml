@@ -1,0 +1,34 @@
+﻿<Page x:Class="WpfCompany.BenchmarkPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfCompany"
+      xmlns:oxy="http://oxyplot.org/wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BenchmarkPage">
+
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+            <!-- voor grafiek -->
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <Label Content="Selecteer jaar:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cmbJaren" Width="100" Margin="10 0"/>
+            <Button Content="Benchmark" Click="Benchmark_Click" Margin="10 0"/>
+        </StackPanel>
+
+        <Label Grid.Row="1" Content="Resultaten:" FontWeight="Bold" Margin="0 10 0 5"/>
+
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+            <oxy:PlotView x:Name="plotView" MinHeight="1500" />
+        </ScrollViewer>
+    </Grid>
+</Page>

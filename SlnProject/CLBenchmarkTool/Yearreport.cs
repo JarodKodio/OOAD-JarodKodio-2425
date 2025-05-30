@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Data.SqlClient;
@@ -27,23 +27,6 @@ namespace BenchmarkToolLibrary.Models
             Id = id;
             Year = year;
             CompanyId = companyId;
-        }
-
-        public void Update()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "UPDATE Yearreports SET year=@year, company_id=@companyId WHERE id=@id", conn);
-
-                cmd.Parameters.AddWithValue("@year", Year);
-                cmd.Parameters.AddWithValue("@companyId", CompanyId);
-                cmd.Parameters.AddWithValue("@id", Id);
-
-                cmd.ExecuteNonQuery();
-            }
         }
 
         public static void Delete(int id)
@@ -74,8 +57,7 @@ namespace BenchmarkToolLibrary.Models
                     Yearreport yr = new Yearreport(
                         (int)reader["id"],
                         (int)reader["year"],
-                        (int)reader["company_id"]
-                    );
+                        (int)reader["company_id"]);
                     list.Add(yr);
                 }
             }
@@ -98,14 +80,28 @@ namespace BenchmarkToolLibrary.Models
                     return new Yearreport(
                         (int)reader["id"],
                         (int)reader["year"],
-                        (int)reader["company_id"]
-                    );
+                        (int)reader["company_id"]);
                 }
             }
 
             return null;
         }
+        public void Update()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Yearreports SET year=@year, company_id=@companyId WHERE id=@id", conn);
 
+                cmd.Parameters.AddWithValue("@year", Year);
+                cmd.Parameters.AddWithValue("@companyId", CompanyId);
+                cmd.Parameters.AddWithValue("@id", Id);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         public override string ToString()
         {
             return $"Year {Year} - Company {CompanyId}";

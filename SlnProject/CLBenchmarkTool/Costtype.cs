@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Data.SqlClient;
@@ -33,25 +33,6 @@ namespace BenchmarkToolLibrary.Models
             TextFr = textFr;
             TextEn = textEn;
         }
-
-        public void Update()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "UPDATE Costtypes SET text=@text, textFr=@textFr, textEn=@textEn WHERE type=@type", conn);
-
-                cmd.Parameters.AddWithValue("@text", Text);
-                cmd.Parameters.AddWithValue("@textFr", TextFr);
-                cmd.Parameters.AddWithValue("@textEn", TextEn);
-                cmd.Parameters.AddWithValue("@type", Type);
-
-                cmd.ExecuteNonQuery();
-            }
-        }
-
         public static void Delete(string type)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
@@ -81,8 +62,7 @@ namespace BenchmarkToolLibrary.Models
                         (string)reader["type"],
                         (string)reader["text"],
                         (string)reader["textFr"],
-                        (string)reader["textEn"]
-                    );
+                        (string)reader["textEn"]);
                     list.Add(ct);
                 }
             }
@@ -106,14 +86,29 @@ namespace BenchmarkToolLibrary.Models
                         (string)reader["type"],
                         (string)reader["text"],
                         (string)reader["textFr"],
-                        (string)reader["textEn"]
-                    );
+                        (string)reader["textEn"]);
                 }
             }
 
             return null;
         }
+        public void Update()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Costtypes SET text=@text, textFr=@textFr, textEn=@textEn WHERE type=@type", conn);
 
+                cmd.Parameters.AddWithValue("@text", Text);
+                cmd.Parameters.AddWithValue("@textFr", TextFr);
+                cmd.Parameters.AddWithValue("@textEn", TextEn);
+                cmd.Parameters.AddWithValue("@type", Type);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         public override string ToString()
         {
             return $"{Type} - {Text}";

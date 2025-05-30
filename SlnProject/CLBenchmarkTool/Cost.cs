@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Data.SqlClient;
@@ -33,26 +33,6 @@ namespace BenchmarkToolLibrary.Models
             CategoryNr = categoryNr;
             YearreportId = yearreportId;
         }
-
-        public void Update()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "UPDATE Costs SET value=@value, costtype_type=@costtypeType, category_nr=@categoryNr, yearreport_id=@yearreportId WHERE id=@id", conn);
-
-                cmd.Parameters.AddWithValue("@value", Value);
-                cmd.Parameters.AddWithValue("@costtypeType", CosttypeType);
-                cmd.Parameters.AddWithValue("@categoryNr", CategoryNr);
-                cmd.Parameters.AddWithValue("@yearreportId", YearreportId);
-                cmd.Parameters.AddWithValue("@id", Id);
-
-                cmd.ExecuteNonQuery();
-            }
-        }
-
         public static void Delete(int id)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
@@ -83,8 +63,7 @@ namespace BenchmarkToolLibrary.Models
                         (decimal)reader["value"],
                         (string)reader["costtype_type"],
                         (int)reader["category_nr"],
-                        (int)reader["yearreport_id"]
-                    );
+                        (int)reader["yearreport_id"]);
                     costs.Add(cost);
                 }
             }
@@ -109,14 +88,30 @@ namespace BenchmarkToolLibrary.Models
                         (decimal)reader["value"],
                         (string)reader["costtype_type"],
                         (int)reader["category_nr"],
-                        (int)reader["yearreport_id"]
-                    );
+                        (int)reader["yearreport_id"]);
                 }
             }
 
             return null;
         }
+        public void Update()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Costs SET value=@value, costtype_type=@costtypeType, category_nr=@categoryNr, yearreport_id=@yearreportId WHERE id=@id", conn);
 
+                cmd.Parameters.AddWithValue("@value", Value);
+                cmd.Parameters.AddWithValue("@costtypeType", CosttypeType);
+                cmd.Parameters.AddWithValue("@categoryNr", CategoryNr);
+                cmd.Parameters.AddWithValue("@yearreportId", YearreportId);
+                cmd.Parameters.AddWithValue("@id", Id);
+
+                cmd.ExecuteNonQuery();
+            }
+        } 
         public override string ToString()
         {
             return $"Cost {Id}: {Value} [{CosttypeType}]";
