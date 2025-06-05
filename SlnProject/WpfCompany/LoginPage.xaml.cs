@@ -30,7 +30,13 @@ namespace WpfCompany
             try
             {
                 Company? company = Company.GetByLogin(loginInput);
-
+                // Controleer of het bedrijf bestaat vergeten toe te voegen
+                if (!company.CheckPassword(passwordInput))
+                {
+                    MessageBox.Show("Fout wachtwoord", "Login mislukt", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                  
                 if (company == null)
                 {
                     MessageBox.Show($"Login niet gevonden: '{loginInput}'", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);

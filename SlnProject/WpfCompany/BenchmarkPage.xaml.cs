@@ -63,7 +63,7 @@ namespace WpfCompany
                 }
 
                 int selectedYear = (int)cmbJaren.SelectedItem;
-                var bedrijf = MainWindow.LoggedInCompany;
+                Company bedrijf = MainWindow.LoggedInCompany;
 
                 if (bedrijf == null)
                 {
@@ -98,15 +98,15 @@ namespace WpfCompany
                     otherAverages[type] = average;
                 }
 
-                var model = new OxyPlot.PlotModel { Title = "Benchmarkresultaten" };
-                var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
-                var valueAxis = new LinearAxis { Position = AxisPosition.Bottom, Title = "Kost (€)" };
+                OxyPlot.PlotModel model = new OxyPlot.PlotModel { Title = "Benchmarkresultaten" };
+                CategoryAxis categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
+                LinearAxis valueAxis = new LinearAxis { Position = AxisPosition.Bottom, Title = "Kost (€)" };
                 model.Axes.Add(categoryAxis);
                 model.Axes.Add(valueAxis);
 
-                var barSeries = new BarSeries { Title = "Kostenvergelijking", BarWidth = 0.5 };
-                var barItems = new List<BarItem>();
-                var labels = new List<string>();
+                BarSeries barSeries = new BarSeries { Title = "Kostenvergelijking", BarWidth = 0.5 };
+                List<BarItem> barItems = new List<BarItem>();
+                List<string> labels = new List<string>();
 
                 ownCosts = ownCosts
                     .GroupBy(c => c.CosttypeType)

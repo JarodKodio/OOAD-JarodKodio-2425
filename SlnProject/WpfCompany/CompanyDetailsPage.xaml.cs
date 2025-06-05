@@ -24,7 +24,7 @@ namespace WpfCompany
 
             try
             {
-                var bedrijf = MainWindow.LoggedInCompany;
+                Company bedrijf = MainWindow.LoggedInCompany;
                 txtNaam.Text = bedrijf.Name;
                 txtContact.Text = bedrijf.Contact;
                 txtEmail.Text = bedrijf.Email;
@@ -42,7 +42,7 @@ namespace WpfCompany
         {
             try
             {
-                var bedrijf = MainWindow.LoggedInCompany;
+                Company bedrijf = MainWindow.LoggedInCompany;
                 bedrijf.Name = txtNaam.Text;
                 bedrijf.Contact = txtContact.Text;
                 bedrijf.Email = txtEmail.Text;
